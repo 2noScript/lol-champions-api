@@ -9,7 +9,6 @@ const getChampion = async (req, res) => {
 
   try {
     const { data } = await request({
-      method: "GET",
       url: `/cdn/${CND_VERSION}/data/${locale}/champion.json`,
     });
     let dataJson = [];
@@ -34,7 +33,6 @@ export const getChampionDetail = async (req, res) => {
 
   try {
     const { data } = await request({
-      method: "GET",
       url: `/cdn/${CND_VERSION}/data/${locale}/champion/${name}.json`,
     });
     res.json(data.data[name]);

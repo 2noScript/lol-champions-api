@@ -12,6 +12,9 @@ import {
   getImgScoreboardIcon,
 } from "./image.js";
 
+import item from "./item.js";
+import summoner from "./summoner.js";
+
 const route = Router();
 
 route.get("/languages", languages);
@@ -27,5 +30,9 @@ route.get("/img/spell/:image", getImgSpell);
 route.get("/img/map/:image", getImgMiniMap);
 route.get("/img/sprite/:image", getImgSprite);
 route.get("/img/scoreboard/icon/:image", getImgScoreboardIcon);
+
+route.get("/item", item);
+
+route.get("/summoner", summoner);
 
 export default route;
