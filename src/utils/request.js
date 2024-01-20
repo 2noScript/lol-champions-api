@@ -34,3 +34,18 @@ export default function request(_options) {
   };
   return instanceAxios(options);
 }
+
+export const pipeSourceImage = async (res, url) => {
+  try {
+    const response = await request({
+      url,
+      responseType: "stream",
+      timeout: 10000,
+    });
+    response.data.pipe(res);
+  } catch (err) {
+    res.status(404).json({
+      err,
+    });
+  }
+};
