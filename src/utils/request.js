@@ -1,7 +1,10 @@
 import axios from "axios";
 import "dotenv/config";
+import { randomHeaders } from "./browser-headers.js";
 
-const instanceAxios = axios.create({});
+const instanceAxios = axios.create();
+
+instanceAxios.defaults.baseURL = process.env.ORIGIN_HOST;
 
 instanceAxios.interceptors.response.use(
   (response) => {
@@ -12,18 +15,16 @@ instanceAxios.interceptors.response.use(
   }
 );
 
-export default async function request(options) {
-  return instanceAxios(options);
-}
-
 export default function request(_options) {
-  const parsedUrl = new URL(_options.url);
+  const parsedUrl = new URL(process.env.ORIGIN_HOST);
+  const host = parsedUrl.hostname;
   const referer = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
   const origin = `${parsedUrl.protocol}//${parsedUrl.host}/`;
   const options = {
     headers: {
       Referer: referer,
       Origin: origin,
+      Host: host,
       "X-Requested-With": "XMLHttpRequest",
       ...randomHeaders(),
     },
